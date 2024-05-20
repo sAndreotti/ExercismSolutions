@@ -1,5 +1,6 @@
 #include <string>
 #include <vector>
+#include<iostream>
 
 namespace election {
 
@@ -34,7 +35,7 @@ struct ElectionResult {
 // name of the winner by prefixing it with "President". The final count is given
 // in the form of a `reference` to `std::vector<ElectionResult>`, a vector with
 // `ElectionResults` of all the participating candidates.
-    ElectionResult& determine_result(std::vector<ElectionResult> final_count){
+    ElectionResult& determine_result(std::vector<ElectionResult>& final_count){
         int winner{-1};
         int max_votes{-1};
         
@@ -45,10 +46,9 @@ struct ElectionResult {
             }
         }
 
-        ElectionResult& president{final_count[winner]};
-        president.name = "President " + president.name;
+        final_count[winner].name = "President " + final_count[winner].name;
         
-        return president;
+        return final_count[winner];
     }
 
 
